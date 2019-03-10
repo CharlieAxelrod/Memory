@@ -11,37 +11,40 @@ class Board extends Component {
   }
 
   handleFlip(clicked) {
-    if (!clicked) {
+    if (!clicked.value) {
       return;
+    } else if (!this.state.flipped.length) {
+      this.setState({flipped: [clicked]});
     } else if (this.state.flipped.some(i => i.id === clicked.id)) {
       return;
     } else if (this.state.flipped.length === 1) {
       this.checkMatch(clicked);
-    } else {
-      this.setState({flipped: [this.state.flipped[0], clicked]});
     }
   }
 
   checkMatch(card) {
-    if (this.state.flipped[0].value === card.value && suitMap[this.state.flipped[0].suit] === card.suit) {
-      this.setState({flipped: [this.state.flipped[0], card]}, () => {
-        setTimeout(() => {console.log('pair')}, 1000);
-      });
-    } else {
-      this.setState({flipped: [this.state.flipped[0], card]}, () => {
-        setTimeout(() => {this.setState({flipped: []})}, 1000);
-      });
-    }
+    this.setState({flipped: [this.state.flipped[0], card]}, () => {
+      let [a, b] = this.state.flipped;
+      console.log(a, b);
+      if (a.value === b.value && suitMap[a.suit] === b.suit) {
+        console.log('pair');
+        setTimeout(() => {
+          this.setState({ flipped: [] }, () => this.props.removeCards([a, b]))
+        }, 1000);
+      } else {
+        setTimeout(() => this.setState({ flipped: [] }), 1000);
+      }
+    });
   }
 
   render() {
     return (
-      <div>
+      <div className="card-grid">
       {this.props.cards.map((card, index) => 
-      card === null 
-        ? <div minHeight="100.2" minWidth="145.6"></div>
-        : < Card key={card.id} id={card.id} location={index} suit={card.suit} value={card.value} 
-        flipped={this.state.flipped.some(i => i.id === card.id) ? true : false} handleFlip={this.handleFlip.bind(this)} />)}
+      card.value
+        ? < Card key={card.id} id={card.id} location={index} suit={card.suit} value={card.value} 
+          flipped={this.state.flipped.some(i => i.id === card.id) ? true : false} handleFlip={this.handleFlip.bind(this)} />
+      : <div key={card.id}></div>)}
       </div>
     )
   }

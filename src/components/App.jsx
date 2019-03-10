@@ -9,8 +9,8 @@ class App extends Component {
     super(props);
     this.state = {
       cards: [],
-      won: false,
-      started: false
+      started: false,
+      removed: 0
     }
   }
 
@@ -19,6 +19,19 @@ class App extends Component {
     this.setState({
       cards: shuffled,
       started: true,
+      removed: 0
+    });
+  }
+
+  removeCards(toRemove){
+    this.setState(prevState => ({
+      cards: prevState.cards.map(card => 
+        card.id === toRemove[0].id || card.id === toRemove[1].id ? {id: card.id} : card),
+      removed: prevState.removed + 2
+    }), () => {
+      if (this.state.removed === 54) {
+        console.log('done')
+      }
     });
   }
 
@@ -26,8 +39,10 @@ class App extends Component {
     return (
       <div>
         {this.state.started 
-          ? < Board cards={this.state.cards} /> 
+          ? < Board cards={this.state.cards} removeCards={this.removeCards.bind(this)} /> 
           : < Start startGame={this.startGameHandler.bind(this)} />}
+        {this.state.won
+          ? }
       </div>
     );
   }

@@ -11,7 +11,7 @@ class Card extends Component {
   }
 
   render() {
-    return <img onClick={this.handleClick} width="100.2" height="145.6" src={this.props.flipped 
+    return <img width="100.2px" height="145.6px" onClick={this.handleClick} src={this.props.flipped 
       ? `assets/cards/${this.props.id}.svg`
       : "assets/cards/back.svg"} />
   }
