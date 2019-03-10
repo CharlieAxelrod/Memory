@@ -42,12 +42,12 @@ class App extends Component {
 
   render(){
     return (
-      <div>
+      <div className="container">
         {this.state.started 
           ? < Board cards={this.state.cards} removeCards={this.removeCards.bind(this)} /> 
           : < Start startGame={this.startGameHandler.bind(this)} />}
         {this.state.won
-          ? <h1>Good Work! Click the button to start a new game</h1>
+          ? <h1 className="win-message">Good Work! Click the button to start a new game</h1>
           : null}
       </div>
     );

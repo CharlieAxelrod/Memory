@@ -3,9 +3,49 @@ html, body, div {
   height: 100%;
 }
 
+.container {
+  overflow: auto;
+  background-color: #F0F0F0;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+}
+
+.start-container {
+  height: 60%;
+}
+
+.start-title {
+  text-align: center;
+  padding: 10% 0 5% 0;
+  font-size: 4em;
+}
+
+.start-button {
+  display: block;
+  height: 80px;
+  width: 150px;
+  margin: 0 auto;
+  background-color: #2E8B57;
+  font-size: 1em;
+  color: white;
+  border-radius: 5px;
+}
+
+.start-button:hover{
+  opacity: 0.8;
+}
+
+.guesses-number {
+  font-size: 3em;
+}
 
 .card-grid {
   display: grid;
   grid-template-columns: 9% 9% 9% 9% 9% 9% 9% 9% 9% 9% 9%;
   grid-template-rows: 20% 20% 20% 20% 20%;
+}
+
+.win-message {
+  text-align: center;
 }

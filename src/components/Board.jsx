@@ -6,7 +6,8 @@ class Board extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      flipped: []
+      flipped: [],
+      counter: 0
     }
   }
 
@@ -14,7 +15,9 @@ class Board extends Component {
     if (!clicked.value) {
       return;
     } else if (!this.state.flipped.length) {
-      this.setState({flipped: [clicked]});
+      this.setState(prevState => 
+        ({flipped: [clicked], 
+          counter: prevState.counter + 1}));
     } else if (this.state.flipped.some(i => i.id === clicked.id)) {
       return;
     } else if (this.state.flipped.length === 1) {
@@ -23,11 +26,12 @@ class Board extends Component {
   }
 
   checkMatch(card) {
-    this.setState({flipped: [this.state.flipped[0], card]}, () => {
+    this.setState( prevState => ({
+      flipped: [this.state.flipped[0], card],
+      counter: prevState.counter + 1
+    }), () => {
       let [a, b] = this.state.flipped;
-      console.log(a, b);
       if (a.value === b.value && suitMap[a.suit] === b.suit) {
-        console.log('pair');
         setTimeout(() => {
           this.setState({ flipped: [] }, () => this.props.removeCards([a, b]))
         }, 1000);
@@ -40,11 +44,11 @@ class Board extends Component {
   render() {
     return (
       <div className="card-grid">
-      {this.props.cards.map((card, index) => 
-      card.value
+        {this.props.cards.map((card, index) => card.value
         ? < Card key={card.id} id={card.id} location={index} suit={card.suit} value={card.value} 
           flipped={this.state.flipped.some(i => i.id === card.id) ? true : false} handleFlip={this.handleFlip.bind(this)} />
-      : <div key={card.id}></div>)}
+        : <div key={card.id}></div>)}
+        <h2>Guesses: <div className="guesses-number">{this.state.counter}</div></h2>
       </div>
     )
   }
