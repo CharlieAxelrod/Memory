@@ -261,12 +261,12 @@ export default [
   },
   {
     id: 53,
-    suit: 'joker',
+    suit: 'red',
     value: 'JOKER'
   },
   {
     id: 54,
-    suit: 'joker',
+    suit: 'black',
     value: 'JOKER'
   }
 ]

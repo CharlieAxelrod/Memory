@@ -25,7 +25,9 @@ class App extends Component {
   render(){
     return (
       <div>
-        {this.state.started ? < Board cards={this.state.cards} /> : < Start startGame={this.startGameHandler.bind(this)} />}
+        {this.state.started 
+          ? < Board cards={this.state.cards} /> 
+          : < Start startGame={this.startGameHandler.bind(this)} />}
       </div>
     );
   }
