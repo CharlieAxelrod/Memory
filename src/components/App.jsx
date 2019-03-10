@@ -10,7 +10,8 @@ class App extends Component {
     this.state = {
       cards: [],
       started: false,
-      removed: 0
+      removed: 0,
+      won: false
     }
   }
 
@@ -19,7 +20,8 @@ class App extends Component {
     this.setState({
       cards: shuffled,
       started: true,
-      removed: 0
+      removed: 0,
+      won: false
     });
   }
 
@@ -30,7 +32,10 @@ class App extends Component {
       removed: prevState.removed + 2
     }), () => {
       if (this.state.removed === 54) {
-        console.log('done')
+        this.setState({
+          won: true,
+          started: false
+        });
       }
     });
   }
@@ -42,7 +47,8 @@ class App extends Component {
           ? < Board cards={this.state.cards} removeCards={this.removeCards.bind(this)} /> 
           : < Start startGame={this.startGameHandler.bind(this)} />}
         {this.state.won
-          ? }
+          ? <h1>Good Work! Click the button to start a new game</h1>
+          : null}
       </div>
     );
   }
