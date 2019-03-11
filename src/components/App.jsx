@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Board from './Board.jsx';
 import Start from './Start.jsx';
-import boardFunctions from '../data/boardFunctions.js';
+import deal from '../data/boardFunctions.js';
 
 class App extends Component {
   constructor(props) {
@@ -16,7 +16,7 @@ class App extends Component {
   }
 
   startGameHandler(){
-    let shuffled = boardFunctions.deal();
+    let shuffled = deal();
     this.setState({
       cards: shuffled,
       started: true,

@@ -9,4 +9,4 @@ function deal() {
   return cards;
 }
 
-export default { deal };
+export default deal;
